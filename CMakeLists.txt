@@ -9,8 +9,23 @@ project(${PROGRAM}
         LANGUAGES CXX)
 set(CMAKE_CXX_FLAGS "-Wall")
 
+option(BUILD_BITWISE_DEMO "Enter building bitwise demonstration" OFF)
+option(DBUILD_VECTOR_DEMO "Enter building STL vector demonstration" OFF)
+
+
+
 add_executable(${PROGRAM} ${SOURCE_DIR}/main.cpp)
 target_compile_features(${PROGRAM} PRIVATE cxx_std_20)
+
+if(${BUILD_BITWISE_DEMO})
+    message(STATUS "Preparting to build bitwise demo...")
+    target_compile_definitions(${PROGRAM} PRIVATE USE_BITWISE_DEMO)
+endif()
+
+if(${BUILD_VECTOR_DEMO})
+    message(STATUS "Preparting to build vector demo...")
+    target_compile_definitions(${PROGRAM} PRIVATE USE_VECTOR_DEMO)
+endif()
 
 #fetch submodules
 
@@ -38,8 +53,9 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/STL/CMakeLists.txt")
 endif()
 
 add_subdirectory(external/STL)
-list(APPEND INCLUDE_DIRS "include" "external/STL/include")
+add_subdirectory(external/core)
+list(APPEND INCLUDE_DIRS "include" "external/STL/include" "external/core/include")
 
 target_include_directories(${PROGRAM} PRIVATE ${INCLUDE_DIRS})
-target_link_libraries(${PROGRAM} PRIVATE STL_Lib)
+target_link_libraries(${PROGRAM} PRIVATE STL_Lib PRIVATE core_lib)
 
