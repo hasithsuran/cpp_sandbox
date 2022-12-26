@@ -1,3 +1,6 @@
 [submodule "external/STL"]
 	path = external/STL
 	url = git@github.com:hasithsuran/libCpp_STL.git
+[submodule "external/core"]
+	path = external/core
+	url = git@github.com:hasithsuran/libCpp_basics.git

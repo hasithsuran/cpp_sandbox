@@ -1,2 +1,5 @@
 #! /bin/sh
-cmake -S . -B build/
+cmake \
+-DBUILD_BITWISE_DEMO=OFF \
+-DBUILD_VECTOR_DEMO=ON \
+-S . -B build/
