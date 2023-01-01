@@ -60,6 +60,12 @@
         "variant": "cpp",
         "vector": "cpp",
         "algorithm": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "numbers": "cpp",
+        "*.tcc": "cpp",
+        "functional": "cpp",
+        "utility": "cpp"
     }
 }

@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+    message(FATAL_ERROR “In-source build detected!”)
+endif()
+
 set(PROGRAM "CppDemo")
 set(SOURCE_DIR "src")
 
@@ -27,6 +31,21 @@ if(${BUILD_VECTOR_DEMO})
     target_compile_definitions(${PROGRAM} PRIVATE USE_VECTOR_DEMO)
 endif()
 
+if(${BUILD_LAMBDA_DEMO})
+    message(STATUS "Preparting to build lambda demo...")
+    target_compile_definitions(${PROGRAM} PRIVATE USE_LAMBDA_DEMO)
+endif()
+
+if(${BUILD_MAP_DEMO})
+    message(STATUS "Preparting to build map demo...")
+    target_compile_definitions(${PROGRAM} PRIVATE USE_MAP_DEMO)
+endif()
+
+if(${BUILD_BASIC_MEMORY_DEMO})
+    message(STATUS "Preparting to build basic memory demo...")
+    target_compile_definitions(${PROGRAM} PRIVATE USE_BASIC_MEMORY_DEMO)
+endif()
+
 #fetch submodules
 
 find_package(Git QUIET)
@@ -52,9 +71,16 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/STL/CMakeLists.txt")
     message(FATAL_ERROR "The submodules were not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
 endif()
 
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/core/CMakeLists.txt")
+    message(FATAL_ERROR "The submodules were not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
+endif()
+
 add_subdirectory(external/STL)
 add_subdirectory(external/core)
-list(APPEND INCLUDE_DIRS "include" "external/STL/include" "external/core/include")
+list(APPEND INCLUDE_DIRS 
+"include" 
+"external/STL/include" 
+"external/core/include")
 
 target_include_directories(${PROGRAM} PRIVATE ${INCLUDE_DIRS})
 target_link_libraries(${PROGRAM} PRIVATE STL_Lib PRIVATE core_lib)
