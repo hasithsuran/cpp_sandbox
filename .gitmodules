@@ -4,3 +4,6 @@
 [submodule "external/core"]
 	path = external/core
 	url = git@github.com:hasithsuran/libCpp_basics.git
+[submodule "external/design_concepts"]
+	path = external/design_concepts
+	url = git@github.com:hasithsuran/lib_designPatterns.git
