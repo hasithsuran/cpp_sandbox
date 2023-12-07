@@ -4,6 +4,10 @@
 #include <TC_Lambda.h>
 #include <TC_Map.h>
 #include <TC_Memory.h>
+#include <TC_Adapter.h>
+#include <TC_Facade.h>
+#include <TC_Variant.h>
+#include <TC_Optional.h>
 
 
 int main(int argc, char **argv)
@@ -39,5 +43,16 @@ int main(int argc, char **argv)
     memoryDemo.basicCopyDemo();
     memoryDemo.advancedMemoryMovement();
 #endif
+
+#ifdef USE_DESIGN_CONCEPT_DEMO
+    techyB::designs::adaptor::runClient();
+    techyB::designs::facade::runClient();
+#endif
+
+#ifdef USE_VARIANT_OPTIONAL_DEMO
+    techyB::essentials::VariantDemo::runClient();
+    techyB::essentials::OptionalDemo::runClient();
+#endif
+
     return 0;
 }
